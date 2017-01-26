@@ -15,7 +15,6 @@
 @class ASDisplayNode;
 @protocol _ASDisplayLayerDelegate;
 
-AS_SUBCLASSING_RESTRICTED
 @interface _ASDisplayLayer : CALayer
 
 /**
