@@ -3432,6 +3432,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
 {
   // Subclass hook
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate interfaceStateDidChange:newState fromState:oldState];
 }
 
 - (BOOL)shouldScheduleDisplayWithNewInterfaceState:(ASInterfaceState)newInterfaceState
@@ -3452,6 +3453,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
   // subclass override
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didEnterVisibleState];
 }
 
 - (void)didExitVisibleState
@@ -3459,6 +3461,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
   // subclass override
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didExitVisibleState];
 }
 
 - (BOOL)isInDisplayState
@@ -3472,6 +3475,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
   // subclass override
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didEnterDisplayState];
 }
 
 - (void)didExitDisplayState
@@ -3479,6 +3483,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
   // subclass override
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didExitDisplayState];
 }
 
 - (BOOL)isInPreloadState
@@ -3516,6 +3521,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
 {
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didEnterPreloadState];
   
   if (_methodOverrides & ASDisplayNodeMethodOverrideFetchData) {
 #pragma clang diagnostic push
@@ -3529,6 +3535,7 @@ ASDISPLAYNODE_INLINE BOOL nodeIsInRasterizedTree(ASDisplayNode *node) {
 {
   ASDisplayNodeAssertMainThread();
   ASDisplayNodeAssertLockUnownedByCurrentThread(__instanceLock__);
+  [_interfaceStateDelegate didExitPreloadState];
   
   if (_methodOverrides & ASDisplayNodeMethodOverrideClearFetchedData) {
 #pragma clang diagnostic push
